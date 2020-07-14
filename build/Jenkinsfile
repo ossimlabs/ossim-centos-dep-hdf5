@@ -6,7 +6,7 @@ properties([
     pipelineTriggers([
             [$class: "GitHubPushTrigger"]
     ]),
-    [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/ossim-szip'],
+    [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/ossim-hdf5'],
     buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20')),
     disableConcurrentBuilds()
 ])
@@ -47,20 +47,20 @@ node(POD_LABEL){
         }
         load "common-variables.groovy"
     }
-    stage (" Checkout szip")
+    stage (" Checkout hdf5")
     {
         container('builder') 
         {
-            sh """./checkout-szip.sh
+            sh """./checkout-hdf5.sh
                   """
         }
     }
-    stage (" Build szip")
+    stage (" Build hdf5")
     {
         container('builder') 
         {
             sh """
-                  ./build-szip.sh"""
+                  ./build-hdf5.sh"""
         }
     }
     
