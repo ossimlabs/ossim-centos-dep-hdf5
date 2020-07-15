@@ -51,8 +51,10 @@ node(POD_LABEL){
     {
         container('builder') 
         {
-            sh """./checkout-hdf5.sh
-                  """
+            sh """
+              ./checkout-szip.sh
+              ./checkout-hdf5.sh
+            """
         }
     }
     stage (" Build hdf5")
@@ -60,7 +62,9 @@ node(POD_LABEL){
         container('builder') 
         {
             sh """
-                  ./build-hdf5.sh"""
+              ./build-szip.sh
+              ./build-hdf5.sh
+            """
         }
     }
     
