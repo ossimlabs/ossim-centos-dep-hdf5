@@ -64,7 +64,7 @@ node(POD_LABEL){
             sh """
               ./build-szip.sh
               ./build-hdf5.sh
-              tar -czvf alpine-geos.tgz /usr/local
+              tar -czvf centos-hdf5.tgz /usr/local
             """
         }
     }
@@ -72,7 +72,7 @@ node(POD_LABEL){
     stage("Publish"){
         withCredentials([usernameColonPassword(credentialsId: 'nexusCredentials', variable: 'NEXUS_CREDENTIALS')])
           {
-            sh "curl -v -u ${NEXUS_CREDENTIALS} --upload-file alpine-geos.tgz https://nexus.ossim.io/repository/ossim-dependencies/"
+            sh "curl -v -u ${NEXUS_CREDENTIALS} --upload-file centos-hdf5.tgz https://nexus.ossim.io/repository/ossim-dependencies/"
           }
     }
     
